@@ -1,0 +1,154 @@
+Details administratifs:
+
+- Aucune forme de communication n'est permise.
+
+       - Vous devez avoir votre carte d'etudiant. Vous devez la poser face visible
+          sur votre table
+
+        - Ceci est un examen, il est interdit de discuter, ecouter de la musique,
+          faire du bruit, ou de produire toute autres nuisances pouvant deranger les
+          autres etudiants ou perturber le bon deroulement de l'examen
+
+        - Vos telephones portables doivent etre eteints.
+
+        - Il faudra utiliser le sous-repertoire "rendu" a la racine du compte,
+          il contiendra les fichiers aux noms demandes pour chaque
+          exercice.
+
+        - Le repertoire "rendu", doit contenir un fichier nomme "auteur"
+          comprenant :
+                le login (ex: jog) suivi d'un '\n'.
+          ce qui doit donner:
+
+          jog@neutron> cat -e ~/rendu/auteur
+          jog$
+
+	  Si votre fichier auteur est faux, il n'y aura pas de correction de l'exam.
+	  
+        - C'est un programme qui s'occupe du ramassage, respectez les noms,
+          les chemins, les fichiers et les repertoires ...
+
+        - LES DROITS DE VOS FICHIERS N'ONT AUCUNE IMPORTANCE, VOUS N'AVEZ DONC
+          PAS BESOIN DE LES CHANGER (SAUF SI ON VOUS LE DEMANDE DANS LE SUJET).
+
+        - En cas de probleme technique avec le sujet, on ne doit s'adresser qu'au
+          surveillant uniquement.
+
+        - Tout materiel non explicitement autorise est strictement interdit.
+
+        - Toute sortie est definitive.
+
+ ----------******------------*****------------******------------*****----------
+
+Vous devez effectuer le rendu dans ~/rendu/
+Pour chaque question vous devez rendre un fichier nomme
+ex_"no_question".sql contenant la requete sql de l'exercice en question (la
+requete doit etre valide).
+
+Par exemple pour l'exercice 05 le fichier doit s'appeler ex_05.sql.
+
+Pour le qcm, mettez juste le numero de la reponse dans le fichier
+ex_"no_question".sql (avec ou sans \n ca n'a pas d'importance).
+
+Vous n'avez le droit de faire qu'une seule requete par question (en gros il ne doit
+y avoir q'un seul ';' dans chaque fichier), sauf quand il
+est explicitement precise que l'on doit faire plusieurs requetes.
+
+
+Quand vous vous loguez, la base de donnee n'est pas initialisee et lancee.
+Vous devez l'initialiser avec le script "~/sujet/install_sql.sh".
+Attention la base va etre completement effacee et le server relance.
+La base de donnee se trouve dans /tmp.
+
+Une fois la base lancee, vous pouvez vous y connecter avec votre client
+mysql. Le login est "root" et il n'y as pas de password
+La base de donnee a utiliser s'appelle epitech_tp, c'est la seule base a
+utiliser, dans les reponses que vous rendrez il ne faut pas selectionner la base.
+
+(machin_t@bidule) mysql -u root -S /tmp/mysql.sock  epitech_tp
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.0.45 FreeBSD port: mysql-server-5.0.45
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql>
+
+
+Le contenu de la base utilisee pour la correction sera le meme que celle que vous avez
+au detail pres que les id de chaque entree est susceptible de changer (mais les lien 
+entre les entrees seront toujours les memes: les films auront les memes distributeurs,
+les membres seront alles voir les memes films et auront les memes cartes de reduction).
+
+
+Questions:
+
+01. Faire une requete qui affiche le titre (dans la colonne "le titre") et le resume 
+(dans la colonne "resum") des films qui ont le chiffre 28 dans leur titre.
+
+02. Faire une requete qui affiche le titre et le resume separes par un "-" (dans une 
+colonne "titre - resum") des 50 derniers films classes par id genre
+(exemple : 28 jours plus tard - Un film genial).
+
+03. Faire une requete qui affiche le titre d'origine en minuscule (dans une colonne "titre min"), 
+le resume d'origine en minuscule egalement (dans une colonne "resum min"), le nom du genre (dans une 
+colonne "nom genre"), l'id du genre (dans une colonne "id genre"), le titre modifie (dans une colonne
+"titre replace") et le resume modifie (dans une colonne "resum replace") des films qui appartiennent
+au genre "science fiction" ou au genre "drama", en remplacant toutes les occurences de "28" 
+par des "21" dans les titre et dans les resumes modifies.
+
+04. Faire une requete qui affiche le nombre de places dans le cinema (dans une colonne "nbr place").
+
+05. Faire une requete qui affiche l'id du membre (dans une colonne "id_membre"), l'id de la fiche (dans une colonne
+"id_perso"), la date d'inscription (dans une colonne "date inscription") et le nombre de jour depuis l'inscription
+(dans une colonne "nbr jours") des membres qui se sont inscrit il y a au moins 2024 jours mais pas plus de 4048 jours, 
+le tout ordonne par date d'inscription decroissante.
+
+06. Faire une requete qui affiche l'id des membres (dans une colonne "id_membre) et la date de visionnage (dans une colonne
+"histo date") des membres ayant vu les films d'i 2989 et/ou 2762, le tout ordonne par date de visionnage decroissante.
+
+07. Faire une requete qui affiche le prenom (dans une colone "prenom") des personnes dont le nom commence par un 'A' 
+et finit par un 'Y' (case insensitive).
+
+08. Faire une requete qui affiche le  nom des salles qui possedent plus de 100 sieges (dans une colonne "nom_salle").
+
+09. Faire une requete qui affiche le numero de l'etage (dans une colone "num etage"), le nombre de salle de l'etage 
+(dans une colonne "nbr salle") et le nombre de place total sur l'etage (dans une colonne "nbr place") pour les etages
+comptant plus de 300 places, compris entre le 1er et le 3eme etage inclus, le tout ordonne par numero d'etage decroissant.
+
+10. Faire une requete qui affiche pour chaque genre des films l'id du genre (dans une colonne "id_genre"), 
+le nombre de films qu'il y a dans ce genre (dans une colonne "nombre films") et sur la derniere ligne de resultat le nombre
+total de film (indice : super-agregat).
+
+11. Faire une requete qui affiche le plus grand id_film (dans une colonne "max id film") des films du genre "action".
+
+12. Faire une requete qui affiche le nombre d'etage du cinema (sauf rez de chausse) et l'afficher dans une colonne "nbr etage".
+
+13. Faire une requete qui affiche le titre (dans une colonne "titre") des films qui ont un des id suivants :
+"1, 34, 45, 2, 123, 42642, LOLARD, 4525, 2, 46, 48574, 37, 90, 05,
+5436, 0005, ABC, 3, 0x34, 875783, 224, 1964".
+
+14. Faire une requete qui affiche (dans une colonne "nom") le nom des reductions qui ont un pourcentage positif mais different de 25,
+le tout ordonne par id_reduction croissant.
+
+15. Faire une requete qui affiche (dans une colonne "nbr_d") le nombre de distributeur dont le numero de telephone commence par 05.
+
+16. Faire une requete qui affiche l'id du membre (dans une colonne "id_membre") et le nombre de films differents vu (dans une colonne 
+"nb_films") pour chaque membre du cinema, le tout ordonne par nombre de film vu decroissant puis par ordre croissant d'id_membre.
+
+17. Faire une requete qui affiche le titre des films (dans une colonne "titre film") qui ont comme id de genre 0, 6 ou 5 et dont le titre 
+commence par la lettre E (case insensitive).
+
+18. Que signifie SQL ?
+
+1: "Structured Query Language"
+2: "Syntax Query Language"
+
+19. Quel serveur SQL n'existe pas ?
+1: "Microsoft SQL Server"
+2: "PostgreSQL"
+3: "Eclipse"
+
+20. Peut on mettre un HAVING a la place d'un WHERE
+1: oui
+2: non
