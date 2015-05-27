@@ -1,10 +1,11 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 user='exam'
 
 cd `dirname $0`
 
-[ $# == 0 ] && echo "Usage: $0 file" >&2 && exit 1
+[ $# == 0 ] && echo "Usage: $0 file [login]" >&2 && exit 1
+[ $# == 2 ] && user="$2"
 
 size=$(wc -l "$1" | cut -d' ' -f1)
 end=$(grep -an "Questions:" -- "$1" | cut -d':' -f1)
