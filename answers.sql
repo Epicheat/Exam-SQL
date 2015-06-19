@@ -1,5 +1,7 @@
 --Faire une requete qui affiche le titre (dans la colonne "le titre") et le resume (dans la colonne "resum") des films qui ont le chiffre 28 dans leur titre.
 SELECT titre AS "le titre", resum FROM film WHERE titre LIKE "%28%";
+--Faire une requete qui affiche le titre (dans la colonne "le titre") et le resume(dans la colonne "resum") des films qui ont le nombre 28 dans leur titre.
+SELECT titre AS "le titre", resum FROM film WHERE titre LIKE "%28%";
 --Faire une requete qui affiche le titre et le resume separes par un "-" (dans une colonne "titre - resum") des 50 derniers films classes par id genre(exemple : 28 jours plus tard - Un film genial).
 SELECT CONCAT(titre, CONCAT(" - ", resum)) AS "titre - resum" FROM film ORDER BY id_genre LIMIT 50;
 --Faire une requete qui affiche le titre d'origine en minuscule (dans une colonne "titre min"), le resume d'origine en minuscule egalement (dans une colonne "resum min"), le nom du genre (dans une colonne "nom genre"), l'id du genre (dans une colonne "id genre"), le titre modifie (dans une colonne"titre replace") et le resume modifie (dans une colonne "resum replace") des films qui appartiennentau genre "science fiction" ou au genre "drama", en remplacant toutes les occurences de "28" par des "21" dans les titre et dans les resumes modifies.
@@ -13,6 +15,8 @@ SELECT SUM(nbr_siege) AS "nbr place" FROM salle;
 --Faire une requete qui affiche l'id du membre (dans une colonne "id_membre"), l'id de la fiche (dans une colonne"id_perso"), la date d'inscription (dans une colonne "date inscription") et le nombre de jour depuis l'inscription(dans une colonne "nbr jours") des membres qui se sont inscrit il y a au moins 2024 jours mais pas plus de 4048 jours, le tout ordonne par date d'inscription decroissante.
 SELECT id_membre, id_fiche_perso AS "id_perso", date_inscription AS "date inscription", DATEDIFF(NOW(), date_inscription) AS "nbr jours" FROM membre WHERE DATEDIFF(NOW(), date_inscription) BETWEEN 2024 AND 4048 ORDER BY date_inscription DESC;
 --Faire une requete qui affiche l'id des membres (dans une colonne "id_membre) et la date de visionnage (dans une colonne "histo date") des membres ayant vu les films d'id 2989 et/ou 2762, le tout ordonne par date de visionnage decroissante.
+SELECT id_membre, date AS "histo date" FROM historique_membre WHERE id_film IN(2989, 2762) ORDER BY date DESC;
+-- Faire une requete qui affiche l'id des membres (dans une colonne "id_membre) et la date de visionnage (dans une colonne "histo date") des membres ayant vu les films d'i 2989 et/ou 2762, le tout ordonne par date de visionnage decroissante
 SELECT id_membre, date AS "histo date" FROM historique_membre WHERE id_film IN(2989, 2762) ORDER BY date DESC;
 --Faire une requete qui affiche l'id du membre (dans une colonne "id_membre") et la date de visionnage (dans une colonne "histo date") pour les membres qui sont alles voir les films numeros 2989 ou numeros 2762, ordonnee par date decroissante.
 SELECT id_membre, date AS "histo date" FROM historique_membre WHERE id_film IN(2989, 2762) ORDER BY date DESC;
@@ -30,11 +34,15 @@ SELECT MAX(film.id_film) AS "max id film" FROM film, genre WHERE film.id_genre =
 SELECT MAX(film.id_film) AS "max id film" FROM film, genre WHERE film.id_genre = genre.id_genre AND genre.nom = "action";
 --Faire une requete qui affiche le nombre d'etage du cinema (sauf rez de chausse) et l'afficher dans une colonne "nbr etage".
 SELECT COUNT(DISTINCT etage_salle) AS "nbr etage" FROM salle WHERE etage_salle != 0;
+--Faire une requete qui affiche le nombre d'etage du cinema (sauf le rez de chausse) et l'afficher dans unecolonne "nbr etage".
+SELECT COUNT(DISTINCT etage_salle) AS "nbr etage" FROM salle WHERE etage_salle != 0;
 -- Faire une requete qui affiche le nombre d'etage du cinema (sauf le rez de chausse) et l'afficher dans une colonne "nbr etage".
 SELECT COUNT(DISTINCT etage_salle) AS "nbr etage" FROM salle WHERE etage_salle != 0;
 --Faire une requete qui affiche le titre (dans une colonne "titre") des films qui ont un des id suivants :"1, 34, 45, 2, 123, 42642, LOLARD, 4525, 2, 46, 48574, 37, 90, 05,5436, 0005, ABC, 3, 0x34, 875783, 224, 1964".
 SELECT titre FROM film WHERE id_film IN(1, 34, 45, 2, 123, 42642, "LOLARD", 4525,2, 46, 48574, 37, 90, 05, 5436, 0005, "ABC", 3, 0x34, 875786, 224, 1964);
 --Faire une requete qui affiche (dans une colonne "nom") le nom des reductions qui ont un pourcentage positif mais different de 25,le tout ordonne par id_reduction croissant.
+SELECT nom FROM reduction WHERE pourcentage_reduc > 0 AND pourcentage_reduc != 25 ORDER BY id_reduction ASC;
+--Faire une requete qui affiche le nom des reductions qui ont un pourcentage de reduction positif etdifferent de 25 (dans une colonne "nom") ordonnes par id_reduction croissant.
 SELECT nom FROM reduction WHERE pourcentage_reduc > 0 AND pourcentage_reduc != 25 ORDER BY id_reduction ASC;
 --Faire une requete qui affiche le nom des reductions qui ont un pourcentage de reduction positif et different de 25(dans une colonne "nom") ordonnes par id_reduction croissant.
 SELECT nom FROM reduction WHERE pourcentage_reduc > 0 AND pourcentage_reduc != 25 ORDER BY id_reduction ASC;
@@ -49,6 +57,8 @@ SELECT titre AS "titre film" FROM film WHERE id_genre IN(0, 6, 5) AND titre LIKE
 --Faire une requete qui affiche le titre des films (dans une colonne "titre film")qui ont comme id de genre 0, 6 ou 5 et dont les titres commencent par lalettre E (case insensitive).
 SELECT titre AS "titre film" FROM film WHERE id_genre IN(0, 6, 5) AND titre LIKE "E%";
 --Faire une requete qui affiche l'id_film (dans une colonne "id_film"), le titre (dans une colonne "titre") et le resume (dans une colonne "resum film")des films qui sont dans la table film.
+SELECT id_film, titre, resum AS "resum film" FROM film;
+--Faire une requete qui affiche l'id_film (dans une colonne "id_film"),le titre (dans une colonne "titre") et le resume (dans une colonne "resum film")de tous les films qui sont dans la table film du cinema.
 SELECT id_film, titre, resum AS "resum film" FROM film;
 --Faire une requete qui affiche l'id_film (dans une colonne "id_film"), le titre (dans une colonne "titre") et le resume (dans une colonne "resum film")de tous les films qui sont dans la table film du cinema.
 SELECT id_film, titre, resum AS "resum film" FROM film;
@@ -78,3 +88,5 @@ SELECT nom_salle FROM salle WHERE nbr_siege BETWEEN 100 AND 300;
 SELECT titre, date_debut_affiche AS "date_debut", film.id_distrib AS "id_distrib", nom AS "nom_distrib" FROM film LEFT JOIN distrib ON distrib.id_distrib = film.id_distrib WHERE titre LIKE "%death%";
 --Faire une requete qui affiche le titre des films (dans une colonne "film"), leur date de debut d'affiche (dans une colonne "date_debut_affiche"), leur id (dans une colonne "id_film") et le nombre de personnes uniques qui l'ont vu (dans une colonne "nb_vues") pour les 50 films les plus vus, classes par nombre de vue decroissant puis par id film croissant.
 SELECT titre AS "film", date_debut_affiche, film.id_film, COUNT(historique_membre.id_film) AS "nb_vues" FROM film JOIN historique_membre ON film.id_film = historique_membre.id_film GROUP BY film.id_film ORDER BY COUNT(historique_membre.id_film) DESC, film.id_film ASC LIMIT 50;
+--Faire une requete qui affiche le titre (dans une colonne "titre"), les dates de debut (dans une colonne "date_debut_affiche") et de fin d'affiche (dans une colonne "date_fin_affiche") et le nombre de jours ou les films ont ete a l'affiche (dans une colonne "temps_affiche") pour les films dont ont peut calculer le temps d'affiche.
+SELECT titre, date_debut_affiche, date_fin_affiche, DATEDIFF(date_fin_affiche, date_debut_affiche) AS "temps_affiche" FROM film WHERE DATEDIFF(date_fin_affiche, date_debut_affiche) IS NOT NULL;
